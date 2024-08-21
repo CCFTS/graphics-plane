@@ -1,0 +1,9 @@
+README.md
+setup.py
+graphis_planes/__init__.py
+graphis_planes/modulo.py
+graphis_planes/modulo2.py
+graphis_planes.egg-info/PKG-INFO
+graphis_planes.egg-info/SOURCES.txt
+graphis_planes.egg-info/dependency_links.txt
+graphis_planes.egg-info/top_level.txt
