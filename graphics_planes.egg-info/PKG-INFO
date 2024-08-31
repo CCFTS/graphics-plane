@@ -1,0 +1,146 @@
+Metadata-Version: 2.1
+Name: graphics_planes
+Version: 0.8
+Summary: Esta es una libreria para generar graficos en 2D, añadiendo herramientas y utilidades extras para mejorar la generacion de graficos.
+Home-page: https://github.com/CCFTS/graphics-plane
+Author: Damian Zsiros, Alejandro Beltran, Alejandro de La Esprella, Cristian Cuadrado
+Author-email: damjeronzalez23@gmail.com
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
+
+
+# graphics-plane
+
+`graphics-plane` es una librerÃ­a de Python para crear grÃ¡ficos en 2D y exportarlos a formato SVG. Permite generar y manipular figuras geomÃ©tricas como rectÃ¡ngulos y triÃ¡ngulos, y combinar varias figuras en un Ãºnico dibujo.
+
+## InstalaciÃ³n
+
+Puedes instalar `graphics-plane` desde PyPI usando pip. Ejecuta el siguiente comando en tu terminal:
+
+```bash
+pip install graphics-plane
+```
+
+## Uso BÃ¡sico
+
+### Importar la LibrerÃ­a
+
+Primero, importa las clases necesarias en tu script:
+
+```python
+from graphics_plane import DrawingTool, Drawing
+```
+
+### Crear Figuras y Dibujo
+
+1. **Crear una instancia de `DrawingTool`** para generar figuras:
+
+   ```python
+   drawing_tool = DrawingTool()
+   ```
+
+2. **Crear un objeto `Drawing`** para manejar el conjunto de figuras:
+
+   ```python
+   drawing = Drawing("Sample Drawing")
+   ```
+
+3. **Generar figuras y aÃ±adirlas al dibujo**:
+
+   ```python
+   # Crear un rectÃ¡ngulo y un triÃ¡ngulo
+   rectangle = drawing_tool.create_rectangle(100, 50)
+   triangle = drawing_tool.create_triangle(100, 80)
+
+   # AÃ±adir las figuras al dibujo
+   drawing.add_shape(rectangle)
+   drawing.add_shape(triangle)
+   ```
+
+4. **Mostrar y exportar el dibujo**:
+
+   ```python
+   # Mostrar las figuras en el dibujo (para depuraciÃ³n)
+   drawing.show_shapes()
+
+   # Exportar el dibujo completo a SVG
+   drawing.export_to_svg("sample_drawing.svg")
+   ```
+
+## Clases y MÃ©todos
+
+### `Shape`
+
+Representa una forma geomÃ©trica. Puedes agregar trazos y exportar la figura a SVG.
+
+- **MÃ©todos**:
+  - `add_trace(start, end)`: Agrega un trazo a la figura.
+  - `export_to_svg(filename)`: Exporta la figura a un archivo SVG.
+  - `show_traces()`: Muestra los trazos de la figura (para depuraciÃ³n).
+
+### `DrawingTool`
+
+Proporciona mÃ©todos para crear formas geomÃ©tricas bÃ¡sicas.
+
+- **MÃ©todos**:
+  - `create_rectangle(width, height)`: Crea un rectÃ¡ngulo con el ancho y alto especificados.
+  - `create_triangle(base, height)`: Crea un triÃ¡ngulo con la base y altura especificadas.
+
+### `Drawing`
+
+Maneja un conjunto de formas y permite exportar el dibujo completo a SVG.
+
+- **MÃ©todos**:
+  - `add_shape(shape)`: AÃ±ade una forma al dibujo.
+  - `export_to_svg(filename)`: Exporta el dibujo completo a un archivo SVG.
+  - `show_shapes()`: Muestra todas las formas y sus trazos (para depuraciÃ³n).
+
+## Ejemplos
+
+AquÃ­ tienes un ejemplo completo de cÃ³mo usar la librerÃ­a para crear y exportar un dibujo:
+
+```python
+from graphics_plane import DrawingTool, Drawing
+
+# Crear una instancia de DrawingTool
+drawing_tool = DrawingTool()
+
+# Crear un objeto Drawing
+drawing = Drawing("Sample Drawing")
+
+# Crear un rectÃ¡ngulo y un triÃ¡ngulo
+rectangle = drawing_tool.create_rectangle(100, 50)
+triangle = drawing_tool.create_triangle(100, 80)
+
+# AÃ±adir las figuras al dibujo
+drawing.add_shape(rectangle)
+drawing.add_shape(triangle)
+
+# Mostrar las figuras en el dibujo
+drawing.show_shapes()
+
+# Exportar el dibujo completo a SVG
+drawing.export_to_svg("sample_drawing.svg")
+```
+
+## Mantenedores
+
+Este proyecto es mantenido por:
+
+- **DamiÃ¡n Zsiros**  
+  [GitHub](https://github.com/damiansziros)  
+  ![GitHub](https://img.shields.io/badge/GitHub-damiansziros-lightgrey?logo=github&logoColor=white)
+
+- **Alejandro BeltrÃ¡n**  
+  [GitHub](https://github.com/alejandrobeltran)  
+  ![GitHub](https://img.shields.io/badge/GitHub-alejandrobeltran-lightgrey?logo=github&logoColor=white)
+
+## Contribuciones
+
+Las contribuciones son bienvenidas. Si encuentras algÃºn problema o deseas mejorar la librerÃ­a, abre un [issue](https://github.com/tu_usuario/graphics-plane/issues) o envÃ­a un pull request en el [repositorio](https://github.com/tu_usuario/graphics-plane).
+
+## Licencia
+
+Este proyecto estÃ¡ licenciado bajo la [Licencia MIT](LICENSE).
