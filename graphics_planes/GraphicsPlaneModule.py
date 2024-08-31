@@ -1,29 +1,18 @@
-from .ShapeModule import Shape
-import math
+import svgwrite
+from .ShapeModule import Rectangle, Triangle
+
 class GraphicsPlane:
-    def create_rectangle(width, height):
-        shape = Shape("Rectangle")
-        x, y = 0, 0
-
-        shape.add_trace((x, y), (x + width, y))
-        shape.add_trace((x + width, y), (x + width, y - height))
-        shape.add_trace((x + width, y - height), (x, y - height))
-        shape.add_trace((x, y - height), (x, y))
-
+    def create_rectangle(self, width, height, x=0, y=0):
+        shape = Rectangle(width, height, label="Rectangle", x=x, y=y)
         return shape
 
-    def create_triangle( base, height):
-        shape = Shape("Triangle")
-        x, y = 0, 0
-
-        side = math.sqrt((base / 2) ** 2 + height ** 2)
-        x2, y2 = base / 2, -height
-        x3, y3 = -base / 2, -height
-
-        shape.add_trace((x, y), (x2, y2))
-        shape.add_trace((x2, y2), (x3, y3))
-        shape.add_trace((x3, y3), (x, y))
-
+    def create_triangle(self, base, height, x=0, y=0):
+        shape = Triangle(base, height, label="Triangle", x=x, y=y)
         return shape
 
-
+    def export_to_svg(self, shape, file_name):
+        dwg = svgwrite.Drawing(file_name, profile='tiny')
+        shape_group = dwg.add(dwg.g(id='shape', fill='none', stroke='black'))
+        shape._draw_to_svg(shape_group, dwg)
+        dwg.save()
+        print(f"Figura exportada a {file_name}")

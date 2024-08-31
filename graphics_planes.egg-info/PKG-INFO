@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: graphics_planes
-Version: 0.8
+Version: 1.0.1
 Summary: Esta es una libreria para generar graficos en 2D, añadiendo herramientas y utilidades extras para mejorar la generacion de graficos.
 Home-page: https://github.com/CCFTS/graphics-plane
 Author: Damian Zsiros, Alejandro Beltran, Alejandro de La Esprella, Cristian Cuadrado
@@ -13,7 +13,7 @@ Description-Content-Type: text/markdown
 
 # graphics-plane
 
-`graphics-plane` es una librerÃ­a de Python para crear grÃ¡ficos en 2D y exportarlos a formato SVG. Permite generar y manipular figuras geomÃ©tricas como rectÃ¡ngulos y triÃ¡ngulos, y combinar varias figuras en un Ãºnico dibujo.
+`graphics-plane` es una librerÃ­a de Python para crear grÃ¡ficos en 2D y exportarlos a formato SVG. Permite generar y manipular figuras geomÃ©tricas como rectÃ¡ngulos y triÃ¡ngulos, y combinarlas en un Ãºnico dibujo dentro de un plano definido.
 
 ## InstalaciÃ³n
 
@@ -30,99 +30,115 @@ pip install graphics-plane
 Primero, importa las clases necesarias en tu script:
 
 ```python
-from graphics_plane import DrawingTool, Drawing
+from graphics_plane import Plane, Rectangle, Triangle
 ```
 
 ### Crear Figuras y Dibujo
 
-1. **Crear una instancia de `DrawingTool`** para generar figuras:
+1. **Crear un objeto `Plane`** especificando el ancho y alto del Ã¡rea de trabajo:
 
    ```python
-   drawing_tool = DrawingTool()
+   plane = Plane(name="Sample Plane", width=200, height=200)
    ```
 
-2. **Crear un objeto `Drawing`** para manejar el conjunto de figuras:
+2. **Crear instancias de las figuras**:
 
    ```python
-   drawing = Drawing("Sample Drawing")
+   # Crear un rectÃ¡ngulo y un triÃ¡ngulo con posiciones especÃ­ficas
+   rectangle = Rectangle(width=100, height=50, label="My Rectangle", x=50, y=50)
+   triangle = Triangle(width=100, height=80, label="My Triangle", x=100, y=100)
    ```
 
-3. **Generar figuras y aÃ±adirlas al dibujo**:
+3. **AÃ±adir las figuras al plano**:
 
    ```python
-   # Crear un rectÃ¡ngulo y un triÃ¡ngulo
-   rectangle = drawing_tool.create_rectangle(100, 50)
-   triangle = drawing_tool.create_triangle(100, 80)
-
-   # AÃ±adir las figuras al dibujo
-   drawing.add_shape(rectangle)
-   drawing.add_shape(triangle)
+   # AÃ±adir las figuras al plano
+   plane.add_shape(rectangle)
+   plane.add_shape(triangle)
    ```
 
-4. **Mostrar y exportar el dibujo**:
+4. **Mostrar y exportar el plano**:
 
    ```python
-   # Mostrar las figuras en el dibujo (para depuraciÃ³n)
-   drawing.show_shapes()
+   # Mostrar las figuras en el plano (para depuraciÃ³n)
+   plane.show_shapes()
 
-   # Exportar el dibujo completo a SVG
-   drawing.export_to_svg("sample_drawing.svg")
+   # Exportar el plano completo a SVG
+   plane.export_to_svg("sample_plane.svg")
    ```
 
 ## Clases y MÃ©todos
 
 ### `Shape`
 
-Representa una forma geomÃ©trica. Puedes agregar trazos y exportar la figura a SVG.
+Representa una forma geomÃ©trica. Puedes definir la posiciÃ³n y exportar la figura a SVG.
+
+- **Atributos**:
+  - `width`: Ancho de la figura.
+  - `height`: Alto de la figura.
+  - `label`: Etiqueta de la figura.
+  - `x`: PosiciÃ³n horizontal en el plano.
+  - `y`: PosiciÃ³n vertical en el plano.
 
 - **MÃ©todos**:
-  - `add_trace(start, end)`: Agrega un trazo a la figura.
-  - `export_to_svg(filename)`: Exporta la figura a un archivo SVG.
-  - `show_traces()`: Muestra los trazos de la figura (para depuraciÃ³n).
+  - `draw(drawer)`: Dibuja la figura usando un objeto `drawer` (para exportaciÃ³n a SVG o para depuraciÃ³n con `turtle`).
+  - `export_to_svg(drawer, file_name)`: Exporta la figura a un archivo SVG.
+  - `_draw_to_svg(shape_group, drawer)`: MÃ©todo interno para aÃ±adir la figura al SVG.
 
-### `DrawingTool`
+### `Rectangle`
 
-Proporciona mÃ©todos para crear formas geomÃ©tricas bÃ¡sicas.
+Representa un rectÃ¡ngulo y hereda de `Shape`.
 
 - **MÃ©todos**:
-  - `create_rectangle(width, height)`: Crea un rectÃ¡ngulo con el ancho y alto especificados.
-  - `create_triangle(base, height)`: Crea un triÃ¡ngulo con la base y altura especificadas.
+  - `draw(drawer)`: Dibuja el rectÃ¡ngulo utilizando `turtle`, centrado en la posiciÃ³n (`x`, `y`).
+  - `_draw_to_svg(shape_group, drawer)`: AÃ±ade el rectÃ¡ngulo al SVG con la posiciÃ³n ajustada.
 
-### `Drawing`
+### `Triangle`
+
+Representa un triÃ¡ngulo y hereda de `Shape`.
+
+- **MÃ©todos**:
+  - `draw(drawer)`: Dibuja el triÃ¡ngulo utilizando `turtle`, centrado en la posiciÃ³n (`x`, `y`).
+  - `_draw_to_svg(shape_group, drawer)`: AÃ±ade el triÃ¡ngulo al SVG con la posiciÃ³n ajustada.
+
+### `Plane`
 
 Maneja un conjunto de formas y permite exportar el dibujo completo a SVG.
 
+- **Atributos**:
+  - `width`: Ancho del plano.
+  - `height`: Alto del plano.
+  - `shapes`: Lista de figuras en el plano.
+
 - **MÃ©todos**:
-  - `add_shape(shape)`: AÃ±ade una forma al dibujo.
-  - `export_to_svg(filename)`: Exporta el dibujo completo a un archivo SVG.
-  - `show_shapes()`: Muestra todas las formas y sus trazos (para depuraciÃ³n).
+  - `add_shape(shape)`: AÃ±ade una forma al plano.
+  - `export_to_svg(filename)`: Exporta el plano completo a un archivo SVG.
+  - `show_shapes()`: Muestra todas las formas y sus posiciones utilizando `turtle` (para depuraciÃ³n).
+  - `show_with_turtle()`: Utiliza `turtle` para dibujar todas las figuras en el plano, brindando una representaciÃ³n visual interactiva.
 
 ## Ejemplos
 
 AquÃ­ tienes un ejemplo completo de cÃ³mo usar la librerÃ­a para crear y exportar un dibujo:
 
 ```python
-from graphics_plane import DrawingTool, Drawing
+from graphics_plane import Plane, Rectangle, Triangle
 
-# Crear una instancia de DrawingTool
-drawing_tool = DrawingTool()
-
-# Crear un objeto Drawing
-drawing = Drawing("Sample Drawing")
+# Crear una instancia de Plane
+plane = Plane(name="Sample Plane", width=200, height=200)
 
 # Crear un rectÃ¡ngulo y un triÃ¡ngulo
-rectangle = drawing_tool.create_rectangle(100, 50)
-triangle = drawing_tool.create_triangle(100, 80)
+rectangle = Rectangle(width=100, height=50, label="My Rectangle", x=50, y=50)
+triangle = Triangle(width=100, height=80, label="My Triangle", x=100, y=100)
 
-# AÃ±adir las figuras al dibujo
-drawing.add_shape(rectangle)
-drawing.add_shape(triangle)
+# AÃ±adir las figuras al plano
+plane.add_shape(rectangle)
+plane.add_shape(triangle)
 
-# Mostrar las figuras en el dibujo
-drawing.show_shapes()
+# Mostrar las figuras en el plano
+plane.show_shapes()
 
-# Exportar el dibujo completo a SVG
-drawing.export_to_svg("sample_drawing.svg")
+# Exportar el plano completo a SVG
+plane.export_to_svg("sample_plane.svg")
 ```
 
 ## Mantenedores
@@ -130,12 +146,12 @@ drawing.export_to_svg("sample_drawing.svg")
 Este proyecto es mantenido por:
 
 - **DamiÃ¡n Zsiros**  
-  [GitHub](https://github.com/damiansziros)  
-  ![GitHub](https://img.shields.io/badge/GitHub-damiansziros-lightgrey?logo=github&logoColor=white)
+  [GitHub](https://github.com/Damian-Zsiros-Prog)  
+  ![GitHub](https://img.shields.io/badge/GitHub-Damian--Zsiros--Prog-lightgrey?logo=github&logoColor=white)
 
 - **Alejandro BeltrÃ¡n**  
-  [GitHub](https://github.com/alejandrobeltran)  
-  ![GitHub](https://img.shields.io/badge/GitHub-alejandrobeltran-lightgrey?logo=github&logoColor=white)
+  [GitHub](https://github.com/Beltranposso)  
+  ![GitHub](https://img.shields.io/badge/GitHub-Beltranposso-lightgrey?logo=github&logoColor=white)
 
 ## Contribuciones
 
