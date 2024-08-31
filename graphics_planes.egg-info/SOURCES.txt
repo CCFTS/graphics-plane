@@ -7,4 +7,5 @@ graphics_planes/__init__.py
 graphics_planes.egg-info/PKG-INFO
 graphics_planes.egg-info/SOURCES.txt
 graphics_planes.egg-info/dependency_links.txt
+graphics_planes.egg-info/requires.txt
 graphics_planes.egg-info/top_level.txt

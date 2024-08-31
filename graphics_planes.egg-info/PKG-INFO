@@ -1,21 +1,27 @@
 Metadata-Version: 2.1
 Name: graphics_planes
-Version: 1.0.1
+Version: 1.0.2
 Summary: Esta es una libreria para generar graficos en 2D, añadiendo herramientas y utilidades extras para mejorar la generacion de graficos.
 Home-page: https://github.com/CCFTS/graphics-plane
-Author: Damian Zsiros, Alejandro Beltran, Alejandro de La Esprella, Cristian Cuadrado
+Author: Damian Zsiros
 Author-email: damjeronzalez23@gmail.com
+Maintainer: Alejandro Beltran, Cristian Cuadrado
 Classifier: Programming Language :: Python :: 3
 Classifier: License :: OSI Approved :: MIT License
 Requires-Python: >=3.6
 Description-Content-Type: text/markdown
+Requires-Dist: setuptools==74.0.0
+Requires-Dist: twine==5.1.1
+Requires-Dist: svg_turtle==0.4.2
+Requires-Dist: svgwrite==1.4.3
+Requires-Dist: PythonTurtle==0.3.2
 
 
 # graphics-plane
 
-`graphics-plane` es una librerÃ­a de Python para crear grÃ¡ficos en 2D y exportarlos a formato SVG. Permite generar y manipular figuras geomÃ©tricas como rectÃ¡ngulos y triÃ¡ngulos, y combinarlas en un Ãºnico dibujo dentro de un plano definido.
+`graphics-plane` es una librería de Python para crear gráficos en 2D y exportarlos a formato SVG. Permite generar y manipular figuras geométricas como rectángulos y triángulos, y combinarlas en un único dibujo dentro de un plano definido.
 
-## InstalaciÃ³n
+## Instalación
 
 Puedes instalar `graphics-plane` desde PyPI usando pip. Ejecuta el siguiente comando en tu terminal:
 
@@ -23,9 +29,9 @@ Puedes instalar `graphics-plane` desde PyPI usando pip. Ejecuta el siguiente com
 pip install graphics-plane
 ```
 
-## Uso BÃ¡sico
+## Uso Básico
 
-### Importar la LibrerÃ­a
+### Importar la Librería
 
 Primero, importa las clases necesarias en tu script:
 
@@ -35,7 +41,7 @@ from graphics_plane import Plane, Rectangle, Triangle
 
 ### Crear Figuras y Dibujo
 
-1. **Crear un objeto `Plane`** especificando el ancho y alto del Ã¡rea de trabajo:
+1. **Crear un objeto `Plane`** especificando el ancho y alto del área de trabajo:
 
    ```python
    plane = Plane(name="Sample Plane", width=200, height=200)
@@ -44,15 +50,15 @@ from graphics_plane import Plane, Rectangle, Triangle
 2. **Crear instancias de las figuras**:
 
    ```python
-   # Crear un rectÃ¡ngulo y un triÃ¡ngulo con posiciones especÃ­ficas
+   # Crear un rectángulo y un triángulo con posiciones específicas
    rectangle = Rectangle(width=100, height=50, label="My Rectangle", x=50, y=50)
    triangle = Triangle(width=100, height=80, label="My Triangle", x=100, y=100)
    ```
 
-3. **AÃ±adir las figuras al plano**:
+3. **Añadir las figuras al plano**:
 
    ```python
-   # AÃ±adir las figuras al plano
+   # Añadir las figuras al plano
    plane.add_shape(rectangle)
    plane.add_shape(triangle)
    ```
@@ -60,46 +66,46 @@ from graphics_plane import Plane, Rectangle, Triangle
 4. **Mostrar y exportar el plano**:
 
    ```python
-   # Mostrar las figuras en el plano (para depuraciÃ³n)
+   # Mostrar las figuras en el plano (para depuración)
    plane.show_shapes()
 
    # Exportar el plano completo a SVG
    plane.export_to_svg("sample_plane.svg")
    ```
 
-## Clases y MÃ©todos
+## Clases y Métodos
 
 ### `Shape`
 
-Representa una forma geomÃ©trica. Puedes definir la posiciÃ³n y exportar la figura a SVG.
+Representa una forma geométrica. Puedes definir la posición y exportar la figura a SVG.
 
 - **Atributos**:
   - `width`: Ancho de la figura.
   - `height`: Alto de la figura.
   - `label`: Etiqueta de la figura.
-  - `x`: PosiciÃ³n horizontal en el plano.
-  - `y`: PosiciÃ³n vertical en el plano.
+  - `x`: Posición horizontal en el plano.
+  - `y`: Posición vertical en el plano.
 
-- **MÃ©todos**:
-  - `draw(drawer)`: Dibuja la figura usando un objeto `drawer` (para exportaciÃ³n a SVG o para depuraciÃ³n con `turtle`).
+- **Métodos**:
+  - `draw(drawer)`: Dibuja la figura usando un objeto `drawer` (para exportación a SVG o para depuración con `turtle`).
   - `export_to_svg(drawer, file_name)`: Exporta la figura a un archivo SVG.
-  - `_draw_to_svg(shape_group, drawer)`: MÃ©todo interno para aÃ±adir la figura al SVG.
+  - `_draw_to_svg(shape_group, drawer)`: Método interno para añadir la figura al SVG.
 
 ### `Rectangle`
 
-Representa un rectÃ¡ngulo y hereda de `Shape`.
+Representa un rectángulo y hereda de `Shape`.
 
-- **MÃ©todos**:
-  - `draw(drawer)`: Dibuja el rectÃ¡ngulo utilizando `turtle`, centrado en la posiciÃ³n (`x`, `y`).
-  - `_draw_to_svg(shape_group, drawer)`: AÃ±ade el rectÃ¡ngulo al SVG con la posiciÃ³n ajustada.
+- **Métodos**:
+  - `draw(drawer)`: Dibuja el rectángulo utilizando `turtle`, centrado en la posición (`x`, `y`).
+  - `_draw_to_svg(shape_group, drawer)`: Añade el rectángulo al SVG con la posición ajustada.
 
 ### `Triangle`
 
-Representa un triÃ¡ngulo y hereda de `Shape`.
+Representa un triángulo y hereda de `Shape`.
 
-- **MÃ©todos**:
-  - `draw(drawer)`: Dibuja el triÃ¡ngulo utilizando `turtle`, centrado en la posiciÃ³n (`x`, `y`).
-  - `_draw_to_svg(shape_group, drawer)`: AÃ±ade el triÃ¡ngulo al SVG con la posiciÃ³n ajustada.
+- **Métodos**:
+  - `draw(drawer)`: Dibuja el triángulo utilizando `turtle`, centrado en la posición (`x`, `y`).
+  - `_draw_to_svg(shape_group, drawer)`: Añade el triángulo al SVG con la posición ajustada.
 
 ### `Plane`
 
@@ -110,15 +116,15 @@ Maneja un conjunto de formas y permite exportar el dibujo completo a SVG.
   - `height`: Alto del plano.
   - `shapes`: Lista de figuras en el plano.
 
-- **MÃ©todos**:
-  - `add_shape(shape)`: AÃ±ade una forma al plano.
+- **Métodos**:
+  - `add_shape(shape)`: Añade una forma al plano.
   - `export_to_svg(filename)`: Exporta el plano completo a un archivo SVG.
-  - `show_shapes()`: Muestra todas las formas y sus posiciones utilizando `turtle` (para depuraciÃ³n).
-  - `show_with_turtle()`: Utiliza `turtle` para dibujar todas las figuras en el plano, brindando una representaciÃ³n visual interactiva.
+  - `show_shapes()`: Muestra todas las formas y sus posiciones utilizando `turtle` (para depuración).
+  - `show_with_turtle()`: Utiliza `turtle` para dibujar todas las figuras en el plano, brindando una representación visual interactiva.
 
 ## Ejemplos
 
-AquÃ­ tienes un ejemplo completo de cÃ³mo usar la librerÃ­a para crear y exportar un dibujo:
+Aquí tienes un ejemplo completo de cómo usar la librería para crear y exportar un dibujo:
 
 ```python
 from graphics_plane import Plane, Rectangle, Triangle
@@ -126,11 +132,11 @@ from graphics_plane import Plane, Rectangle, Triangle
 # Crear una instancia de Plane
 plane = Plane(name="Sample Plane", width=200, height=200)
 
-# Crear un rectÃ¡ngulo y un triÃ¡ngulo
+# Crear un rectángulo y un triángulo
 rectangle = Rectangle(width=100, height=50, label="My Rectangle", x=50, y=50)
 triangle = Triangle(width=100, height=80, label="My Triangle", x=100, y=100)
 
-# AÃ±adir las figuras al plano
+# Añadir las figuras al plano
 plane.add_shape(rectangle)
 plane.add_shape(triangle)
 
@@ -145,18 +151,18 @@ plane.export_to_svg("sample_plane.svg")
 
 Este proyecto es mantenido por:
 
-- **DamiÃ¡n Zsiros**  
+- **Damián Zsiros**  
   [GitHub](https://github.com/Damian-Zsiros-Prog)  
   ![GitHub](https://img.shields.io/badge/GitHub-Damian--Zsiros--Prog-lightgrey?logo=github&logoColor=white)
 
-- **Alejandro BeltrÃ¡n**  
+- **Alejandro Beltrán**  
   [GitHub](https://github.com/Beltranposso)  
   ![GitHub](https://img.shields.io/badge/GitHub-Beltranposso-lightgrey?logo=github&logoColor=white)
 
 ## Contribuciones
 
-Las contribuciones son bienvenidas. Si encuentras algÃºn problema o deseas mejorar la librerÃ­a, abre un [issue](https://github.com/tu_usuario/graphics-plane/issues) o envÃ­a un pull request en el [repositorio](https://github.com/tu_usuario/graphics-plane).
+Las contribuciones son bienvenidas. Si encuentras algún problema o deseas mejorar la librería, abre un [issue](https://github.com/tu_usuario/graphics-plane/issues) o envía un pull request en el [repositorio](https://github.com/tu_usuario/graphics-plane).
 
 ## Licencia
 
-Este proyecto estÃ¡ licenciado bajo la [Licencia MIT](LICENSE).
+Este proyecto está licenciado bajo la [Licencia MIT](LICENSE).
